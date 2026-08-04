@@ -11,10 +11,10 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4 # Рекомендуется обновить и checkout до v4
     
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5 # И setup-python до v5
       with:
         python-version: '3.10'
     
@@ -26,10 +26,11 @@ jobs:
     
     - name: Build executable
       run: |
-        pyinstaller --onefile --windowed --name Explorer main.py --noconfirm --no-console --add-binary "C:\hostedtoolcache\windows\Python\3.10.*\x64\Lib\site-packages\PyQt5\Qt5\bin\*.dll;." --add-data "C:\hostedtoolcache\windows\Python\3.10.*\x64\Lib\site-packages\PyQt5\Qt5\plugins\platforms;platforms"
+        # Упрощенная и более надежная команда для PyInstaller
+        pyinstaller --onefile --windowed --name Explorer main.py --noconfirm
     
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4 # ГЛАВНОЕ ИЗМЕНЕНИЕ: v3 -> v4
       with:
         name: Explorer
         path: dist/Explorer.exe
